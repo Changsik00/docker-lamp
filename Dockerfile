@@ -7,7 +7,7 @@ FROM ubuntu:16.04
 
 # Install apache, PHP, and supplimentary programs. openssh-server, curl, and lynx-cur are for debugging the container.
 RUN apt-get update && apt-get -y upgrade && DEBIAN_FRONTEND=noninteractive apt-get install -y  --no-install-recommends \
-    apache2 php7.0 php7.0-mysql php7.0-curl php7.0-gd php7.0-mcrypt php7.0-xml php7.0-mbstring libapache2-mod-php7.0 curl lynx-cur \
+    apache2 php7.0 php7.0-mysql php7.0-curl php7.0-gd php7.0-mcrypt php7.0-xml libapache2-mod-php7.0 curl ca-certificates lynx-cur \
     vim bash-completion unzip wget git zsh
 
 # Enable apache mods.
@@ -120,5 +120,6 @@ ENTRYPOINT /entrypoint.sh
 # Expose apache mysql 
 EXPOSE 80 3306
 
+CMD ["/usr/sbin/apache2", "-D", "FOREGROUND"]
 
 
